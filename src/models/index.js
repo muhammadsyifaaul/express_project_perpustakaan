@@ -34,15 +34,13 @@ userSchema.pre('save', function(next) {
 userSchema.pre('save', async function(next){
     const user = this
     if(!user.isModified('password')) return next()
-
     user.password = await argon2.hash(this.password)
-
     next()
 })
 
-userSchema.statics.validation = async function(username) {
+userSchema.statics.validationUser = async function(username,password) {
     const user = this.findOne({username})
-    const isValid = await argon2.verify(user.password);
+    const isValid = await argon2.verify(user.password,password);
     
     return isValid ? user : null
 }
