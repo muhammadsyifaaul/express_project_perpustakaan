@@ -1,11 +1,9 @@
-const express = require('express')
-const app = express()
 const validator = require('validator');
 const {User} = require('../models/index')
 
 
 
-app.use(express.urlencoded({ extended: true }));
+
 exports.register = async (req, res) => {
     const { username, password } = req.body;
     // console.log(username,password)
@@ -24,14 +22,17 @@ exports.register = async (req, res) => {
 
 
 
-exports.login = async (req,res) => {
-    const {username,password} = req.body
-    username.trim().escape()
-    password.trim().escape()
+exports.login = async (req,res,next) => {
+    let {username,password} = req.body
+    username = validator.trim(username);
+    username = validator.escape(username);
+    password = validator.trim(password);
+    password = validator.escape(password);
     const user = await User.validationUser(username,password)
     if(user) {
             req.session.userId = user._id
-            res.redirect('/')
+            req.session.role = user.role
+            next()
     } else {
         res.redirect('/login')
     }

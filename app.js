@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+const session = require('express-session')
 const authRoutes = require('./src/routes/authRoutes')
 const expressLayouts = require('express-ejs-layouts')
 
@@ -14,6 +15,12 @@ app.set('views', path.join(__dirname, 'src/views'));
 app.set('layout', 'layouts/layout');
 app.use(express.urlencoded({ extended: true }))
 app.use(expressLayouts);
+app.use(session({
+    secret: 'abogoboganaldshhsd', 
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }  
+}));
 
 app.use('/',authRoutes)
 

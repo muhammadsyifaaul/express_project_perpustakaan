@@ -31,5 +31,7 @@ router.post('/register', (req,res) => {
     authController.register(req,res)
 })
 
+router.post('/login', authController.login,authMiddleware.checkRole)
+
 
 module.exports = router

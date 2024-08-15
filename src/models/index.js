@@ -33,20 +33,28 @@ userSchema.pre('save', function(next) {
 
 userSchema.pre('save', async function(next){
     const user = this
-    if(!user.isModified('password')) { 
-        return next()
-    } else {
-        user.password = await argon2.hash(this.password)
-        next()
+    if (!user.isModified('password')) {
+        return next();
+    }
+    try {
+        user.password = await argon2.hash(user.password);
+        next();
+    } catch (err) {
+        next(err); 
     }
 })
 
-userSchema.statics.validationUser = async function(username,password) {
-    const user = this.findOne({username})
-    const isValid = await argon2.verify(user.password,password);
-    
-    return isValid ? user : null
-}
+userSchema.statics.validationUser = async function(username, password) {
+    const user = await this.findOne({ username });
+    if (user) {
+        if (!user.password) {
+            throw new Error("Password hash is missing");
+        }
+        const isValid = await argon2.verify(user.password, password);
+        return isValid ? user : null;
+    }
+    return null;
+};
 
 const User = mongoose.model('User',userSchema)
 

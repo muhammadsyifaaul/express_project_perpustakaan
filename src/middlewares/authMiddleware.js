@@ -9,10 +9,11 @@ exports.checkSession = (req,res,next) => {
 
 exports.checkRole = (req,res,next) => {
     if (req.session && req.session.role === 'admin') {
-        // Arahkan ke halaman admin jika role adalah 'admin'
-        next()
+        res.render('admin/adminDash', {
+            title: 'Admin Dashboard',
+            layout: 'layouts/adminLayout'
+            });
     } else {
-        // Arahkan ke halaman user jika role adalah 'user'
         res.render('user/userDash', {
         title: 'User Dashboard',
         layout: 'layouts/userLayout'
