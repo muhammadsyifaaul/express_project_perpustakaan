@@ -9,15 +9,9 @@ exports.checkSession = (req,res,next) => {
 
 exports.checkRole = (req,res,next) => {
     if (req.session && req.session.role === 'admin') {
-        res.render('admin/adminDash', {
-            title: 'Admin Dashboard',
-            layout: 'layouts/adminLayout'
-            });
+        res.redirect('/admin')
     } else {
-        res.render('user/userDash', {
-        title: 'User Dashboard',
-        layout: 'layouts/userLayout'
-        });
+        res.redirect('/user/userDash')
     }
 }
 

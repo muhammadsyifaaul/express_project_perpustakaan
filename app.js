@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const authRoutes = require('./src/routes/authRoutes')
 const expressLayouts = require('express-ejs-layouts')
+const adminRoutes = require('./src/routes/adminRoutes')
 
 mongoose.connect('mongodb://localhost:27017/express_project_perpustakaan')
 .then(res => console.log('connected to mongodb'))
@@ -23,6 +24,7 @@ app.use(session({
 }));
 
 app.use('/',authRoutes)
+app.use(adminRoutes)
 
 
 
