@@ -1,21 +1,24 @@
 const express = require('express')
 const app = express()
+const validator = require('validator');
 const {User} = require('../models/index')
 
 
 
 app.use(express.urlencoded({ extended: true }));
 exports.register = async (req, res) => {
-    console.log(req.body); // Tambahkan ini untuk mengecek input
     const { username, password } = req.body;
+
+    const sanitizedUsername = validator.escape(username.trim());
+    const sanitizedPassword = validator.escape(password.trim());
 
     if (!username || !password) {
         return res.status(400).send("Username and password are required");
     }
 
     const user = new User({
-        username,
-        password
+        username: sanitizedUsername,
+        password: sanitizedPassword
     });
     await user.save();
     res.redirect('/login');

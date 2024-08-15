@@ -27,16 +27,9 @@ router.get('/login',(req,res) => {
     })
 })
 
-router.post('/register', [
-    body('username').notEmpty().withMessage('Username is required').trim().escape(),
-    body('password').notEmpty().withMessage('Password is required').trim().escape()
-], (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-    next();
-}, authController.register);
+router.post('/register',(req,res) => {
+    authController.register(req,res)
+})
 
 
 module.exports = router
