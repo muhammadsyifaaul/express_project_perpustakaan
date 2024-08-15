@@ -8,17 +8,15 @@ const {User} = require('../models/index')
 app.use(express.urlencoded({ extended: true }));
 exports.register = async (req, res) => {
     const { username, password } = req.body;
-
-    const sanitizedUsername = validator.escape(username.trim());
-    const sanitizedPassword = validator.escape(password.trim());
+    // console.log(username,password)
 
     if (!username || !password) {
         return res.status(400).send("Username and password are required");
     }
 
     const user = new User({
-        username: sanitizedUsername,
-        password: sanitizedPassword
+        username,
+        password
     });
     await user.save();
     res.redirect('/login');
