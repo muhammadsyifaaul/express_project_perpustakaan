@@ -6,7 +6,7 @@
         <% authors.forEach(author => { %> 
             <ul>
                 <% author.books.forEach(book => { %> 
-                    <li><%- book.title %></li> 
+                    <li><a href="/details/book/<%- book._id %>"><%- book.title %></a></li> 
                 <% }) %>
             </ul>
         <% }) %>
@@ -15,7 +15,7 @@
         <h5>Library Data</h5>
         <ul>
             <% library.forEach(lib => { %>
-                <li><%- lib.name %></li>
+                <li><a href="/details/library/<%- lib._id %>"><%- lib.name %></a></li>
             <% }) %>
         </ul>
     </div>
@@ -23,7 +23,7 @@
         <h5>Author Data</h5>
         <ul>
             <% authors.forEach(author => { %> 
-                 <li><%- author.name %></li> 
+                 <li><a href="/details/author/<%- author._id %>"><%- author.name %></a></li> 
             <% }) %>
         </ul>
     </div>
