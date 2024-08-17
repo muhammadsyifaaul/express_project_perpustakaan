@@ -11,7 +11,7 @@ exports.checkRole = (req,res,next) => {
     if (req.session && req.session.role === 'admin') {
         res.redirect('/admin')
     } else {
-        res.redirect('/user/userDash')
+        res.redirect('/user')
     }
 }
 

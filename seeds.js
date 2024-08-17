@@ -25,7 +25,7 @@ const addData = async () => {
     await Promise.all([user.save(),library.save(),author.save(),book.save()])
     .then(res => console.log('data added successfully'))
     .catch(err => console.log(err))
-    author.books.push(author._id)
+    author.books.push(book._id)
     library.books.push(book._id)
 
     await Promise.all([author.save(),library.save()])

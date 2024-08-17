@@ -1,1 +1,30 @@
-<h1>Hello Admin</h1>
+<a href="/createData" class="btn btn-success badge mt-4">Add Data</a>
+
+<div class="d-flex gap-3">
+    <div class="mt-4">
+        <h5>Book Data</h5>
+        <% authors.forEach(author => { %> 
+            <ul>
+                <% author.books.forEach(book => { %> 
+                    <li><%- book.title %></li> 
+                <% }) %>
+            </ul>
+        <% }) %>
+    </div>
+    <div class="mt-4">
+        <h5>Library Data</h5>
+        <ul>
+            <% library.forEach(lib => { %>
+                <li><%- lib.name %></li>
+            <% }) %>
+        </ul>
+    </div>
+    <div class="mt-4">
+        <h5>Author Data</h5>
+        <ul>
+            <% authors.forEach(author => { %> 
+                 <li><%- author.name %></li> 
+            <% }) %>
+        </ul>
+    </div>
+</div>
