@@ -1,0 +1,9 @@
+<ul>
+    <li><%- author.name %></li>
+    <li>Book Totals<%- author.books.length %></li>
+    <ul>
+        <% author.books.forEach(book => { %>
+            <li><a href="/details/book/<%- book._id %>"><%- book.title %></a></li>
+        <% }) %>
+    </ul>
+</ul>

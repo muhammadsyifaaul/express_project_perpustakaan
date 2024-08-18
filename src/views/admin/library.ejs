@@ -1,0 +1,10 @@
+<ul>
+    <li><%- library.name %></li>
+    <li><%- library.address %></li>
+    <li>Book Total:<%- library.books.length %></li>
+    <ul>
+        <% library.books.forEach(book => { %>
+            <li><a href="/details/book/<%- book._id %>"><%- book.title %></a></li>
+        <% }) %>
+    </ul>
+</ul>
