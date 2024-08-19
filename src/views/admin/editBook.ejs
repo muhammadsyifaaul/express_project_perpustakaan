@@ -1,0 +1,11 @@
+<form action="/editBook/<%- book._id %>?_method=PUT" method="post">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title Book</label>
+      <input type="text" name="title" class="form-control" id="title" required value="<%- book.title %>">
+    </div>
+    <div class="mb-3">
+      <label for="author" class="form-label">Author Book's Name</label>
+      <input type="text" name="authorName" class="form-control" id="author" required value="<%- book.author.name %>">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>

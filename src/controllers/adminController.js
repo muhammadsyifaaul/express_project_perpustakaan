@@ -60,7 +60,6 @@ exports.detailsBook = async (req, res) => {
 exports.detailsLibrary = async (req,res) => {
   const {id} = req.params
   const library = await Library.findById(id).populate('books', 'title')
-  // console.log(library)
   res.render('admin/library', {
     title: 'Details',
     layout: 'layouts/adminLayout',
@@ -77,4 +76,20 @@ exports.detailsAuthor = async (req,res) => {
     layout: 'layouts/adminLayout',
     author
   })
+}
+
+exports.editBookPage = async (req,res) => {
+  const {id} = req.params
+  const book = await Book.findById(id).populate('author')
+  // console.log(book)
+  res.render('admin/editBook', {
+    title: 'Edit Book',
+    layout: 'layouts/adminLayout',
+    book
+  })
+}
+exports.editBook = async (req,res) => {
+  const {title , authorName} = req.body
+  const {id} = req.params
+  console.log(title,authorName,id)
 }

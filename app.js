@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const session = require('express-session')
+const methodOverride = require('method-override');
 const authRoutes = require('./src/routes/authRoutes')
 const expressLayouts = require('express-ejs-layouts')
 const adminRoutes = require('./src/routes/adminRoutes')
@@ -17,6 +18,7 @@ app.set('views', path.join(__dirname, 'src/views'));
 app.set('layout', 'layouts/layout');
 app.use(express.urlencoded({ extended: true }))
 app.use(expressLayouts);
+app.use(methodOverride('_method'))
 app.use(session({
     secret: 'abogoboganaldshhsd', 
     resave: false,
