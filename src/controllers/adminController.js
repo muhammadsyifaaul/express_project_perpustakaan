@@ -91,5 +91,21 @@ exports.editBookPage = async (req,res) => {
 exports.editBook = async (req,res) => {
   const {title , authorName} = req.body
   const {id} = req.params
-  console.log(title,authorName,id)
+  // console.log(title,authorName,id)
+  const author = await Author.findOne({name: authorName})
+  // console.log(author)
+  if(author) {
+    await Book.findByIdAndUpdate(id, {title, author: author._id})
+  } else {
+    let newBook = await Book.findByIdAndUpdate(id, {title})
+    const newAuthor = new Author({
+      name: authorName
+    })
+    await newAuthor.save()
+    await newBook.save()
+    newAuthor.books.push(newBook._id)
+    author.updateOne({})
+    // await Author.findByIdAndUpdate(author._id, { $push: { books: newBook._id } })
+  }
+  // res.redirect('/admin')
 }
